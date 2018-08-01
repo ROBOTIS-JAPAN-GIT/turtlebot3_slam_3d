@@ -1,0 +1,71 @@
+<launch>
+  <arg name="localization"    default="false" doc="Localization mode for navigation"/>
+  <arg name="visual_odometry" default="true" doc="Use ZED odometry"/>
+  <arg name="rviz"            default="false"/>
+  <arg name="database_path"   default="rtabmap.db"/>
+  <arg name="rate"            default="1.0"/>
+
+  <arg     if="$(arg localization)" name="rtabmap_args"  default=""/>
+  <arg unless="$(arg localization)" name="rtabmap_args"  default="--delete_db_on_start"/>
+
+ <!-- RTAB=Map node -->
+  <group ns="rtabmap">
+    <node name="rtabmap" pkg="rtabmap_ros" type="rtabmap" output="screen" args="$(arg rtabmap_args)">
+
+      <param name="database_path"       type="string" value="$(arg database_path)"/>
+      <param name="frame_id"            type="string" value="base_link"/>
+      <param name="subscribe_depth"     type="bool"   value="true"/>
+      <param name="subscribe_scan"      type="bool"   value="true"/>
+
+      <!-- Input topics -->
+      <remap from="scan"                to="/scan"/>
+      <remap from="odom"                to="/stereo_camera/odom"/>
+      <remap from="rgb/image"           to="/stereo_camera/left/image_rect_color"/>
+      <remap from="depth/image"         to="/stereo_camera/depth/depth_registered"/>
+      <remap from="rgb/camera_info"     to="/stereo_camera/left/camera_info"/>
+
+      <!-- Output topics -->
+      <remap from="grid_map" to="/map"/>
+
+      <param name="queue_size" type="int" value="10"/>
+
+      <!-- RTAB-Map's parameters -->
+      <param name="RGBD/NeighborLinkRefining" type="string" value="true"/>
+      <param name="RGBD/ProximityBySpace"     type="string" value="true"/>
+      <param name="RGBD/OptimizeFromGraphEnd" type="string" value="false"/>
+      <param name="RGBD/AngularUpdate"        type="string" value="0.05"/>
+      <param name="RGBD/LinearUpdate"         type="string" value="0.05"/>
+      <param name="Optimizer/Slam2D"          type="string" value="true"/>
+      <param name="Reg/Force3DoF"             type="string" value="true"/>
+      <param name="Reg/Strategy"              type="string" value="1"/> <!-- 1=ICP -->
+      <param name="Vis/MinInliers"            type="string" value="5"/>
+      <param name="Vis/InlierDistance"        type="string" value="0.1"/>
+      <param name="Kp/MaxDepth"               type="string" value="1.75"/>
+      <param name="Vis/MaxDepth"              type="string" value="1.75"/>
+      <param name="Rtabmap/TimeThr"           type="string" value="700"/>
+      <param name="Rtabmap/DetectionRate"     type="string" value="$(arg rate)" />
+      <param name="Mem/RehearsalSimilarity"   type="string" value="0.45"/>
+      <param name="Grid/MaxObstacleHeight"    type="string" value="1.7" />
+      <param name="Grid/NoiseFilteringRadius" type="string" value="0.05"/>
+      <param name="Grid/NoiseFilteringMinNeighbors" type="string" value="5"/>
+      
+      <!-- Localization mode -->
+      <param     if="$(arg localization)" name="Mem/IncrementalMemory" type="string" value="false"/>
+      <param unless="$(arg localization)" name="Mem/IncrementalMemory" type="string" value="true"/>
+      <param name="Mem/InitWMWithAllNodes" type="string" value="$(arg localization)"/>
+
+    </node>
+
+    <!-- Localization node -->
+    <include if="$(arg localization)" file="$(find turtlebot3_navigation)/launch/move_base.launch">
+      <arg name="model" value="waffle"/>
+      <arg name="inflation_radius" value="5"/>
+      <arg name="odom_topic" value="stereo_camera/odom"/>
+    </include>
+
+    <!-- RVIZ node -->
+    <node if="$(arg rviz)" pkg="rviz" type="rviz" name="rviz"
+	  args="-d $(find turtlebot3_slam_3d)/config/mapping.rviz" />
+
+  </group>
+</launch>

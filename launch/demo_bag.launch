@@ -1,0 +1,14 @@
+<launch>
+  <arg name="rate" default="5.0" doc="Rate for rosbag play and RTAB-Map"/>
+  <arg name="rviz" default="true"/>
+
+  <include file="$(find turtlebot3_slam_3d)/launch/turtlebot3_rtabmap.launch">
+    <arg name="rate" value="$(arg rate)"/>
+    <arg name="rviz" value="true"/>
+  </include>
+
+  <include file="$(find turtlebot3_slam_3d)/launch/play_bag.launch">
+    <arg name="rate" value="$(arg rate)"/>
+  </include>
+
+</launch>

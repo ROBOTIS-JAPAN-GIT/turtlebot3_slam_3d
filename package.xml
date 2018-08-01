@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>turtlebot3_slam_3d</name>
+  <version>0.0.0</version>
+  <description>The turtlebot3_slam_3d package</description>
+
+  <maintainer email="jp.support@robotis.com">robotis</maintainer>
+  <license>TODO</license>
+
+  <exec_depend>rtabmap_ros</exec_depend>
+  <exec_depend>zed_wrapper</exec_depend>
+  <buildtool_depend>catkin</buildtool_depend>
+
+</package>

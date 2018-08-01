@@ -1,0 +1,19 @@
+<launch>
+  <arg name="bag_file" default="$(find turtlebot3_slam_3d)/bag/rtab_bag.bag"/>
+  <arg name="rate"     default="5.0"/>
+
+  <include file="$(find turtlebot3_slam_3d)/launch/turtlebot3_monster_model.launch"/>
+
+  <node name="rosbag_play" pkg="rosbag" type="play"
+	args="$(arg bag_file) -r $(arg rate)"/>
+  
+  <node name="republish_right" type="republish" pkg="image_transport" output="screen"
+	args="compressed in:=/stereo_camera/right/image_rect_color raw out:=/stereo_camera/right/image_rect_color" />
+
+  <node name="republish_left" type="republish" pkg="image_transport" output="screen"
+  	args="compressed in:=/stereo_camera/left/image_rect_color raw out:=/stereo_camera/left/image_rect_color" />
+
+  <node name="republish_depth" type="republish" pkg="image_transport" output="screen"
+  	args="compressedDepth in:=/stereo_camera/depth/depth_registered raw out:=/stereo_camera/depth/depth_registered" />
+
+</launch>

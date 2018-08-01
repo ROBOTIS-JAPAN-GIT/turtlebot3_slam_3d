@@ -1,0 +1,13 @@
+<launch>
+  <include file="$(find turtlebot3_bringup)/launch/turtlebot3_robot.launch"/>
+
+  <include file="$(find turtlebot3_slam_3d)/launch/turtlebot3_monster_model.launch"/>
+  
+  <include file="$(find zed_wrapper)/launch/zed_camera.launch" ns="stereo_camera">
+    <arg name="resolution"   value="3"/> <!-- VGA -->
+    <arg name="camera_model" value="1"/> <!-- ZEDM -->
+    <arg name="frame_rate"   value="30"/>
+    <arg name="publish_tf"   value="false"/>
+    <arg name="publish_urdf" value="false"/>
+  </include>
+</launch>

@@ -1,6 +1,5 @@
 <launch>
   <arg name="localization"    default="false" doc="Localization mode for navigation"/>
-  <arg name="visual_odometry" default="true" doc="Use ZED odometry"/>
   <arg name="rviz"            default="false"/>
   <arg name="database_path"   default="rtabmap.db"/>
   <arg name="rate"            default="1.0"/>

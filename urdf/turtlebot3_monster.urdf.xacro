@@ -4,11 +4,6 @@
   <xacro:include filename="$(find turtlebot3_description)/urdf/turtlebot3_waffle.gazebo.xacro"/>
   <!-- <xacro:include filename="$(find realsense2_camera)/urdf/_d435.urdf.xacro"/> -->
   <xacro:include filename="$(find zed_wrapper)/urdf/zedm.urdf"/>
-  
-  <xacro:property name="r200_cam_rgb_px" value="0.005"/>
-  <xacro:property name="r200_cam_rgb_py" value="0.018"/>
-  <xacro:property name="r200_cam_rgb_pz" value="0.013"/>
-  <xacro:property name="r200_cam_depth_offset" value="0.01"/>
 
   <link name="base_footprint"/>
 

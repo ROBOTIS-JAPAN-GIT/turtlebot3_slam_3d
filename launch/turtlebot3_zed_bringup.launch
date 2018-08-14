@@ -8,6 +8,9 @@
     <arg name="camera_model" value="1"/> <!-- ZEDM -->
     <arg name="frame_rate"   value="30"/>
     <arg name="publish_tf"   value="false"/>
-    <arg name="publish_urdf" value="false"/>
+    <arg name="imu_frame"    value="zed_imu_link"/>
   </include>
+
+  <node pkg="tf" type="static_transform_publisher" name="tf_transform"
+	args="0 0 0 0 0 0 /zed_camera_link /zed_camera_center 100"/>
 </launch>

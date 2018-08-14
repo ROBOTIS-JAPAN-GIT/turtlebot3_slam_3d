@@ -3,7 +3,6 @@
   <xacro:include filename="$(find turtlebot3_description)/urdf/common_properties.xacro"/>
   <xacro:include filename="$(find turtlebot3_description)/urdf/turtlebot3_waffle.gazebo.xacro"/>
   <!-- <xacro:include filename="$(find realsense2_camera)/urdf/_d435.urdf.xacro"/> -->
-  <xacro:include filename="$(find zed_wrapper)/urdf/zedm.urdf"/>
 
   <link name="base_footprint"/>
 
@@ -154,7 +153,7 @@
     <origin xyz="0.0 0 0.068" rpy="0 0 0"/>
   </joint>
 
-  <!-- <link name="imu_link"/> -->
+  <link name="imu_link"/>
 
   <joint name="scan_joint" type="fixed">
     <parent link="base_link"/>
@@ -187,12 +186,25 @@
     </inertial>
   </link>
 
+  <!-- ZEDM -->
+  <link name="zed_camera_link">
+    <visual>
+      <geometry>
+        <mesh filename="package://zed_wrapper/urdf/ZEDM.stl" />
+      </geometry>
+      <material name="light_grey">
+        <color rgba="0 0 0 0.9"/>
+      </material>
+    </visual>
+  </link>
+
   <joint name="zed_camera_joint" type="fixed">
     <origin xyz="0.031 -0.008163 0.151843" rpy="0 0 0"/>
     <parent link="base_link"/>
-    <child link="zed_camera_center"/>
+    <child link="zed_camera_link"/>
   </joint>
 
+  <!-- REALSENSE D435 -->
   <!-- <sensor_d435 parent="base_link"> -->
   <!--   <origin xyz="0.049 0.0 0.1795" rpy="0 0 0"/> -->
   <!-- </sensor_d435> -->

@@ -1,11 +1,22 @@
 <launch>
+  <arg name="use_zed"         default="true"  doc="Set to false when using Intel Realsense D435"/>
   <arg name="localization"    default="false" doc="Localization mode for navigation"/>
-  <arg name="rviz"            default="false"/>
   <arg name="database_path"   default="rtabmap.db"/>
+  <arg name="rviz"            default="false"/>
   <arg name="rate"            default="1.0"/>
 
   <arg     if="$(arg localization)" name="rtabmap_args"  default=""/>
   <arg unless="$(arg localization)" name="rtabmap_args"  default="--delete_db_on_start"/>
+
+  <arg name="input_scan"       default="/scan"/>
+  <arg     if="$(arg use_zed)" name="input_odom"         default="/stereo_camera/odom"/>
+  <arg unless="$(arg use_zed)" name="input_odom"         default="/odom"/>
+  <arg     if="$(arg use_zed)" name="input_image"        default="/stereo_camera/left/image_rect_color"/>
+  <arg unless="$(arg use_zed)" name="input_image"        default="/camera/color/image_rect_color"/>
+  <arg     if="$(arg use_zed)" name="input_depth"        default="/stereo_camera/depth/depth_registered"/>
+  <arg unless="$(arg use_zed)" name="input_depth"        default="/camera/depth/image_rect_raw"/>
+  <arg     if="$(arg use_zed)" name="input_camera_info"  default="/stereo_camera/left/camera_info"/>
+  <arg unless="$(arg use_zed)" name="input_camera_info"  default="/camera/color/camera_info"/>
 
  <!-- RTAB=Map node -->
   <group ns="rtabmap">
@@ -17,11 +28,11 @@
       <param name="subscribe_scan"      type="bool"   value="true"/>
 
       <!-- Input topics -->
-      <remap from="scan"                to="/scan"/>
-      <remap from="odom"                to="/stereo_camera/odom"/>
-      <remap from="rgb/image"           to="/stereo_camera/left/image_rect_color"/>
-      <remap from="depth/image"         to="/stereo_camera/depth/depth_registered"/>
-      <remap from="rgb/camera_info"     to="/stereo_camera/left/camera_info"/>
+      <remap from="scan"                to="$(arg input_scan)"/>
+      <remap from="odom"                to="$(arg input_odom)"/>
+      <remap from="rgb/image"           to="$(arg input_image)"/>
+      <remap from="depth/image"         to="$(arg input_depth)"/>
+      <remap from="rgb/camera_info"     to="$(arg input_camera_info)"/>
 
       <!-- Output topics -->
       <remap from="grid_map" to="/map"/>

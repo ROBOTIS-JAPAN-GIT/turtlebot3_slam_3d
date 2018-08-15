@@ -9,6 +9,7 @@
 
   <include file="$(find turtlebot3_slam_3d)/launch/play_bag.launch">
     <arg name="rate" value="$(arg rate)"/>
+    <arg name="delay" value="5.0"/>
   </include>
 
 </launch>

@@ -1,0 +1,17 @@
+- git:
+    local-name: turtlebot3
+    uri: https://github.com/ROBOTIS-GIT/turtlebot3.git
+- git:
+    local-name: turtlebot3_slam_3d
+    uri: https://github.com/ROBOTIS-JAPAN-GIT/turtlebot3_slam_3d.git
+- git:
+    local-name: zed-ros-wrapper
+    uri: https://github.com/stereolabs/zed-ros-wrapper.git
+- git:
+    local-name: realsense
+    uri: https://github.com/Affonso-Gui/realsense.git
+    version: without_tf_publish
+- git:
+    local-name: buildLibrealsense2TX
+    uri: https://github.com/jetsonhacks/buildLibrealsense2TX.git
+    version: v0.81

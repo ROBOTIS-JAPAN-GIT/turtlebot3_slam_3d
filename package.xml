@@ -7,8 +7,11 @@
   <maintainer email="jp.support@robotis.com">robotis</maintainer>
   <license>TODO</license>
 
-  <exec_depend>rtabmap_ros</exec_depend>
-  <exec_depend>zed_wrapper</exec_depend>
   <buildtool_depend>catkin</buildtool_depend>
+  <exec_depend>rtabmap_ros</exec_depend>
+  <exec_depend>turtlebot3_description</exec_depend>
+  <exec_depend>turtlebot3_navigation</exec_depend>
+  <exec_depend>turtlebot3_bringup</exec_depend>
+
 
 </package>

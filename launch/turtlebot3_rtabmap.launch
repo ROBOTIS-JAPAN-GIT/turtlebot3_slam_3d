@@ -65,11 +65,11 @@
       <param name="Mem/InitWMWithAllNodes" type="string" value="$(arg localization)"/>
 
     </node>
+  </group>
 
     <!-- Localization node -->
     <include if="$(arg localization)" file="$(find turtlebot3_navigation)/launch/move_base.launch">
       <arg name="model" value="waffle"/>
-      <arg name="inflation_radius" value="5"/>
       <arg name="odom_topic" value="stereo_camera/odom"/>
     </include>
 
@@ -77,5 +77,4 @@
     <node if="$(arg rviz)" pkg="rviz" type="rviz" name="rviz"
 	  args="-d $(find turtlebot3_slam_3d)/config/mapping.rviz" />
 
-  </group>
 </launch>

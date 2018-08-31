@@ -9,15 +9,15 @@
   <arg     if="$(arg use_zed)" name="depth_topic"  default="/stereo_camera/depth/depth_registered"/>
   <arg unless="$(arg use_zed)" name="depth_topic"  default="/camera/depth/image_rect_raw"/>
 
-  <include file="$(find turtlebot3_slam_3d)/launch/turtlebot3_monster_model.launch"/>
+  <include file="$(find turtlebot3_slam_3d)/launch/publish_model.launch"/>
 
   <node name="rosbag_play" pkg="rosbag" type="play"
         args="$(arg bag_file) -r $(arg rate) -d $(arg delay)"/>
-  
+
   <node name="republish" type="republish" pkg="image_transport" output="screen"
-        args="compressed in:=$(arg image_topic) raw out:=$(arg image_topic)" />
+        args="compressed in:=$(arg image_topic) raw out:=$(arg image_topic)"/>
 
   <node name="republish_depth" type="republish" pkg="image_transport" output="screen"
-        args="compressedDepth in:=$(arg depth_topic) raw out:=$(arg depth_topic)" />
+        args="compressedDepth in:=$(arg depth_topic) raw out:=$(arg depth_topic)"/>
 
 </launch>

@@ -3,7 +3,7 @@
   <arg name="use_zed" default="true"/>
   <arg name="rviz" default="true"/>
 
-  <include file="$(find turtlebot3_slam_3d)/launch/turtlebot3_rtabmap.launch">
+  <include file="$(find turtlebot3_slam_3d)/launch/rtabmap.launch">
     <arg name="use_zed" value="$(arg use_zed)"/>
     <arg name="rate" value="$(arg rate)"/>
     <arg name="rviz" value="true"/>

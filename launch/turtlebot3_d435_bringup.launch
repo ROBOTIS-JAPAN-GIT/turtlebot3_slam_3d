@@ -1,7 +1,7 @@
 <launch>
   <include file="$(find turtlebot3_bringup)/launch/turtlebot3_robot.launch"/>
 
-  <include file="$(find turtlebot3_slam_3d)/launch/turtlebot3_monster_model.launch"/>
+  <include file="$(find turtlebot3_slam_3d)/launch/publish_model.launch"/>
 
   <include file="$(find realsense2_camera)/launch/rs_rgbd.launch"/>
 

@@ -1,0 +1,30 @@
+<launch>
+  <arg name="use_zed"         default="true"  doc="Set to false when using Intel Realsense D435"/>
+  <arg name="visual_odom"     default="false" doc="Use ZED visual odometry"/>
+  <arg name="rviz"            default="false"/>
+
+  <arg     if="$(arg visual_odom)" name="input_odom"  default="/stereo_camera/odom"/>
+  <arg unless="$(arg visual_odom)" name="input_odom"  default="/odom"/>
+
+  <!-- CAMERA -->
+  <include if="$(arg use_zed)" file="$(find turtlebot3_slam_3d)/launch/turtlebot3_zed_bringup.launch">
+    <arg name="visual_odom" value="$(arg visual_odom)"/>
+  </include>
+  <include unless="$(arg use_zed)" file="$(find turtlebot3_slam_3d)/launch/turtlebot3_d435_bringup.launch"/>
+
+  <!-- RTABMAP -->
+  <include file="$(find turtlebot3_slam_3d)/launch/rtabmap.launch">
+    <arg name="use_zed"    value="$(arg use_zed)"/>
+    <arg name="input_odom" value="$(arg input_odom)"/>
+  </include>
+
+  <!-- DARKNET -->
+  <include file="$(find turtlebot3_slam_3d)/launch/darknet.launch">
+    <arg name="use_zed" value="$(arg use_zed)"/>
+  </include>
+
+  <!-- RVIZ -->
+  <node if="$(arg rviz)" pkg="rviz" type="rviz" name="rviz"
+	args="-d $(find turtlebot3_slam_3d)/config/yolo.rviz" />
+
+</launch>

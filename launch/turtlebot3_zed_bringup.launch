@@ -1,4 +1,6 @@
 <launch>
+  <arg name="visual_odom" default="false" doc="Use ZED visual odometry"/>
+
   <include file="$(find turtlebot3_bringup)/launch/turtlebot3_robot.launch"/>
 
   <include file="$(find turtlebot3_slam_3d)/launch/publish_model.launch"/>
@@ -7,7 +9,8 @@
     <arg name="resolution"   value="3"/> <!-- VGA -->
     <arg name="camera_model" value="1"/> <!-- ZEDM -->
     <arg name="frame_rate"   value="30"/>
-    <arg name="publish_tf"   value="false"/>
+    <arg name="publish_tf"   value="$(arg visual_odom)"/>
+    <arg name="base_frame"   value="/base_footprint"/>
     <arg name="imu_frame"    value="zed_imu_link"/>
   </include>
 

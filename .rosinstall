@@ -15,3 +15,6 @@
     local-name: buildLibrealsense2TX
     uri: https://github.com/jetsonhacks/buildLibrealsense2TX.git
     version: v0.81
+- git:
+    local-name: darknet_ros
+    uri: https://github.com/Affonso-Gui/darknet_ros.git --recursive

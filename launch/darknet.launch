@@ -1,0 +1,56 @@
+<launch>
+  <arg name="use_zed"               default="true"   doc="Set to false when using Intel Realsense D435"/>  
+  <arg name="generate_point_cloud"  default="false"  doc="Generate point cloud from input_image and input_depth"/>
+  <arg name="darknet_config"        default="$(find turtlebot3_slam_3d)/config/darknet_config.yaml"/>
+
+  <!-- TOPICS -->
+  <arg     if="$(arg use_zed)" name="input_image"        default="/stereo_camera/left/image_rect_color"/>
+  <arg unless="$(arg use_zed)" name="input_image"        default="/camera/color/image_rect_color"/>
+  <arg     if="$(arg use_zed)" name="input_depth"        default="/stereo_camera/depth/depth_registered"/>
+  <arg unless="$(arg use_zed)" name="input_depth"        default="/camera/depth/image_rect_raw"/>
+  <arg     if="$(arg use_zed)" name="input_camera_info"  default="/stereo_camera/left/camera_info"/>
+  <arg unless="$(arg use_zed)" name="input_camera_info"  default="/camera/color/camera_info"/>
+  <arg     if="$(arg use_zed)" name="point_cloud_topic"  default="/stereo_camera/point_cloud/cloud_registered"/>
+  <arg unless="$(arg use_zed)" name="point_cloud_topic"  default="/camera/depth_registered/points"/>
+
+  <!-- NODELET -->
+  <arg name="MANAGER" value="detection_manager" />
+  <node pkg="nodelet" type="nodelet" args="manager"
+	name="$(arg MANAGER)" output="screen"/>
+
+  <!-- DETECTION -->
+  <param name="/darknet_ros/subscribers/camera_reading/topic"      value="$(arg input_image)"/>
+  <param name="/darknet_ros/subscribers/camera_reading/queue_size" value="1"/>
+  <include file="$(find darknet_ros)/launch/darknet_ros.launch">
+    <arg name="ros_config" value="$(arg darknet_config)"/>
+  </include>
+
+  <!-- POINT CLOUD -->
+  <node if="$(arg generate_point_cloud)"
+	pkg="nodelet" type="nodelet" name="point_cloud_generator"
+  	args="load depth_image_proc/point_cloud_xyzrgb $(arg MANAGER)">
+    <remap from="rgb/camera_info" to="$(arg input_camera_info)"/>
+    <remap from="rgb/image_rect_color" to="$(arg input_image)"/>
+    <remap from="depth_registered/image_rect" to="$(arg input_depth)"/>
+    <remap from="depth_registered/points" to="$(arg point_cloud_topic)"/>
+  </node>
+
+  <!-- COORDINATES -->
+  <node pkg="nodelet" type="nodelet" name="label_mask"
+  	args="load jsk_pcl_utils/LabelToClusterPointIndices $(arg MANAGER)">
+    <remap from="~input" to="darknet_ros/label_image"/>
+    <remap from="~output" to="darknet_ros/cluster_points"/>
+  </node>
+
+  <node pkg="nodelet" type="nodelet" name="cluster_decomposer"
+  	args="load jsk_pcl/ClusterPointIndicesDecomposer $(arg MANAGER)">
+    <remap from="~input" to="$(arg point_cloud_topic)"/>
+    <remap from="~target" to="darknet_ros/cluster_points"/>
+    <rosparam>
+      approximate_sync: true
+      publish_tf: true
+      tf_prefix: yolo_
+    </rosparam>
+  </node>
+
+</launch>

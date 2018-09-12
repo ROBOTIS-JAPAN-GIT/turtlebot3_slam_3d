@@ -5,7 +5,6 @@
 
 ## Quick Start:
 
-First, setup the workspace:
 ```
 mkdir catkin_ws/src -p
 cd catkin_ws
@@ -16,6 +15,17 @@ rosdep install -y -r --from-paths src --ignore-src
 catkin build turtlebot3_slam_3d
 ```
 
+### Launching Demo Program
+
+Download one of the bag files:
+```sh
+# Small version (300MB)
+https://drive.google.com/a/robotis.com/uc?export=download&confirm=SLgY&id=1sfMhQV5ipJm0ghrvQ8HpOw2tTr179aiP
+
+# Full version (1.2GB)
+https://drive.google.com/a/robotis.com/uc?export=download&confirm=BkOw&id=1BUQdcuxshEC-W6O9Jkel6sUP9-FxkLca
+```
+
 Setup the environment with:
 ```
 cd catkin_ws
@@ -23,11 +33,12 @@ source devel/setup.bash
 export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:$(pwd)/src
 ```
 
-Then, launch the sample mapping bag file:
+Then, launch the sample mapping demo:
 ```
-roslaunch turtlebot3_slam_3d demo_bag.launch
+roslaunch turtlebot3_slam_3d demo_bag.launch bag_file:=/path/to/bag_file.bag
 ```
 
+Default `bag_file` path is set to `turtlebot3_slam_3d/rtab_bag.bag`.
 Map is saved to `~/.ros/rtabmap.db` as default setting.
 
 

@@ -1,5 +1,5 @@
 <launch>
-  <arg name="bag_file" default="$(find turtlebot3_slam_3d)/bag/rtab_bag.bag"/>
+  <arg name="bag_file" default="$(find turtlebot3_slam_3d)/rtab_bag.bag"/>
   <arg name="use_zed"  default="true" doc="Set to false when using Intel Realsense D435"/>
   <arg name="delay"    default="0.0"/>
   <arg name="rate"     default="5.0"/>
@@ -12,7 +12,12 @@
   <include file="$(find turtlebot3_slam_3d)/launch/publish_model.launch"/>
 
   <node name="rosbag_play" pkg="rosbag" type="play"
-        args="$(arg bag_file) -r $(arg rate) -d $(arg delay)"/>
+        args="$(arg bag_file) --clock -r $(arg rate) -d $(arg delay)">
+    <remap from="$(arg image_topic)/compressed/throttled"
+    	   to="$(arg image_topic)/compressed"/>
+    <remap from="$(arg depth_topic)/compressedDepth/throttled"
+    	   to="$(arg depth_topic)/compressedDepth"/>
+  </node>
 
   <node name="republish" type="republish" pkg="image_transport" output="screen"
         args="compressed in:=$(arg image_topic) raw out:=$(arg image_topic)"/>

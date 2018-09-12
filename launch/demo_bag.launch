@@ -12,6 +12,7 @@
   <!-- RTABMAP -->
   <include file="$(find turtlebot3_slam_3d)/launch/rtabmap.launch">
     <arg name="rate" value="$(arg rate)"/>
+    <arg name="rviz" value="false"/>
   </include>
 
   <!-- DARKNET -->

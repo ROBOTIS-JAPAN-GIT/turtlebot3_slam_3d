@@ -2,6 +2,11 @@
 
 ![tb3_slam_3d](https://user-images.githubusercontent.com/20625381/43825668-4e781b04-9b30-11e8-828e-3c572ff79b26.jpg)
 
+Sample repository for creating a three dimensional map of the environment in real-time and navigating through it.
+Object detection using YOLO is also performed, showing how neural networks can be used to take advantage of the image database stored by RTAB-Map and use it to e.g. localize objects in the map.
+
+![system_chart](https://user-images.githubusercontent.com/20625381/45400779-10728100-b63d-11e8-8b66-60c1c3080269.png)
+
 
 ## Quick Start:
 
@@ -33,12 +38,13 @@ source devel/setup.bash
 export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:$(pwd)/src
 ```
 
-Then, launch the sample mapping demo:
+Then, launch the sample mapping demo with the following. It takes a while to load the nodes and to play the bag file.
 ```
-roslaunch turtlebot3_slam_3d demo_bag.launch bag_file:=/path/to/bag_file.bag
+roslaunch turtlebot3_slam_3d demo_bag.launch bag_file:=/absolute/path/to/bag_file.bag
 ```
 
 Default `bag_file` path is set to `turtlebot3_slam_3d/rtab_bag.bag`.
+
 Map is saved to `~/.ros/rtabmap.db` as default setting.
 
 
@@ -91,16 +97,20 @@ export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:$(pwd)/src
 
 To create your own map, run:
 ```
-roslaunch turtlebot3_slam_3d turtlebot3_rtabmap.launch
+roslaunch turtlebot3_slam_3d turtlebot3_slam_3d.launch
 ```
 
 To navigate through your map use:
 ```
-roslaunch turtlebot3_slam_3d turtlebot3_rtabmap.launch localization:=true
+roslaunch turtlebot3_slam_3d turtlebot3_zed_bringup.launch
+roslaunch turtlebot3_slam_3d rtabmap.launch localization:=true
 ```
 
-To use **Intel RealSense D435**, use the following instead:
+With **Intel RealSense D435**, use the following instead:
 ```
-roslaunch turtlebot3_slam_3d turtlebot3_rtabmap.launch use_zed:=false
-roslaunch turtlebot3_slam_3d turtlebot3_rtabmap.launch use_zed:=false localization:=true
+roslaunch turtlebot3_slam_3d turtlebot3_slam_3d.launch use_zed:=false
+```
+```
+roslaunch turtlebot3_slam_3d turtlebot3_d435_bringup.launch
+roslaunch turtlebot3_slam_3d rtabmap.launch localization:=true
 ```

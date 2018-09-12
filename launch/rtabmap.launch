@@ -2,7 +2,7 @@
   <arg name="use_zed"         default="true"  doc="Set to false when using Intel Realsense D435"/>
   <arg name="localization"    default="false" doc="Localization mode for navigation"/>
   <arg name="database_path"   default="rtabmap.db"/>
-  <arg name="rviz"            default="false"/>
+  <arg name="rviz"            default="true"/>
   <arg name="rate"            default="1.0"/>
 
   <arg     if="$(arg localization)" name="rtabmap_args"  default=""/>

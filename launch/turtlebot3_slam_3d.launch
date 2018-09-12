@@ -1,7 +1,7 @@
 <launch>
   <arg name="use_zed"         default="true"  doc="Set to false when using Intel Realsense D435"/>
   <arg name="visual_odom"     default="false" doc="Use ZED visual odometry"/>
-  <arg name="rviz"            default="false"/>
+  <arg name="rviz"            default="true"/>
 
   <arg     if="$(arg visual_odom)" name="input_odom"  default="/stereo_camera/odom"/>
   <arg unless="$(arg visual_odom)" name="input_odom"  default="/odom"/>
@@ -16,6 +16,7 @@
   <include file="$(find turtlebot3_slam_3d)/launch/rtabmap.launch">
     <arg name="use_zed"    value="$(arg use_zed)"/>
     <arg name="input_odom" value="$(arg input_odom)"/>
+    <arg name="rviz"       value="false"/>
   </include>
 
   <!-- DARKNET -->

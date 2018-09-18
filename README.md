@@ -112,5 +112,5 @@ roslaunch turtlebot3_slam_3d turtlebot3_slam_3d.launch use_zed:=false
 ```
 ```
 roslaunch turtlebot3_slam_3d turtlebot3_d435_bringup.launch
-roslaunch turtlebot3_slam_3d rtabmap.launch localization:=true
+roslaunch turtlebot3_slam_3d rtabmap.launch localization:=true use_zed:=false
 ```

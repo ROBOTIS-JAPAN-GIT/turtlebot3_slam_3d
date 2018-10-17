@@ -51,18 +51,20 @@ Map is saved to `~/.ros/rtabmap.db` as default setting.
 ## Run with Turtlebot3
 
 ### Hardware Components:
-Main Components:
-- Turtlebot3 Waffle
-- Jetson TX2
-- ZED Mini or Intel RealSense D435
 
-Other Components:
-- 19V Battery for Jetson TX2
-- USB Hub with micro-B connector
-- 3 Additional Waffle Plates
-- 9 Additional Plate Supports M3x45
-- M3x8 Bolts
-- Camera Stand
+| | Part name | Quantity |
+|:---|:---:|:---:|
+| **Main Components** | [Waffle Pi](http://www.robotis.us/turtlebot-3-waffle-pi/) | 1 |
+| | [Jetson TX2](https://developer.nvidia.com/embedded/buy/jetson-tx2-devkit) | 1 |
+| | [ZED Mini](https://www.stereolabs.com/zed-mini/) or [RealSense D435](https://simplecore.intel.com/realsensehub/wp-content/uploads/sites/63/D435_Series_ProductBrief_010718.pdf) | 1 |
+| **Supplementary Items** | [19V Battery for TX2](https://direct.sanwa.co.jp/contents/torisetsu/700-BTL017BK_m.pdf) | 1 |
+| | USB Hub (micro-B to Type A) | 1 |
+| **Camera Bracket** | [ZED Mini Camera Bracket](https://github.com/ROBOTIS-JAPAN-GIT/turtlebot3_slam_3d/blob/master/meshes/waffle_deep_zed_mini_stand.stl) | 1 |
+| | M2x4mm | 2 |
+| | M3x8mm | 2 |
+| **Chassis Parts** | Waffle Plate | 3 |
+| | Plate Support M3x45mm | 11 |
+| | M3x8mm | 22 |
 
 ### Software Components:
 

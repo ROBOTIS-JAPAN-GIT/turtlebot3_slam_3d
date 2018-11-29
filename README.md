@@ -7,6 +7,12 @@ Object detection using YOLO is also performed, showing how neural networks can b
 
 ![system_chart](https://user-images.githubusercontent.com/20625381/45400779-10728100-b63d-11e8-8b66-60c1c3080269.png)
 
+## Screencast:
+
+Click for better quality.
+
+[![turtlebot3_slam_3d_mapping](https://user-images.githubusercontent.com/20625381/49206744-58ac6e80-f3f6-11e8-895b-23a05ec03512.gif)](https://drive.google.com/open?id=11fpvLkPqPS2xIGGCNxgHxWuRkkYeu7e-)
+
 
 ## Quick Start:
 
@@ -19,6 +25,7 @@ wstool update -t src
 rosdep install -y -r --from-paths src --ignore-src
 catkin build turtlebot3_slam_3d
 ```
+
 
 ### Launching Demo Program
 

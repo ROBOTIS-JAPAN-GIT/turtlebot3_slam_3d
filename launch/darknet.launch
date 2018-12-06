@@ -48,6 +48,13 @@
     <remap from="~target" to="darknet_ros/cluster_points"/>
     <rosparam>
       approximate_sync: true
+
+      <!-- TARGET FRAME -->
+      align_boxes: true
+      align_boxes_with_plane: false
+      target_frame_id: map
+
+      <!-- PUBLISH TF -->
       publish_tf: true
       tf_prefix: yolo_
     </rosparam>

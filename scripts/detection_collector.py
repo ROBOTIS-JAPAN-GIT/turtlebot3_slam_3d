@@ -12,7 +12,7 @@ class DetectionCollector(object):
         rospy.Subscriber('/cluster_decomposer/centroid_pose_array', PoseArray, self.collect)
         print 'Searching for objects...'
 
-    def __del__(self):        
+    def __del__(self):
         print "Writing to detections_raw.db..."
         with open('detections_raw.db', 'w') as outfile:
             dump(self.detected, outfile)

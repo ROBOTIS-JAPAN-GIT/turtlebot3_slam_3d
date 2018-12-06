@@ -4,18 +4,18 @@ import rospy
 import argparse
 from yaml import load
 from os.path import expanduser
-from turtlebot3_slam_3d.srv import *
+from turtlebot3_slam_3d.srv import GetObjectLocation, GetObjectLocationResponse
 from visualization_msgs.msg import Marker, MarkerArray
 from geometry_msgs.msg import PoseArray, Pose, Point
 
 class DetectionPublisher(object):
     def __init__(self, filename):
-        with open(filename, 'r') as input:
-            self.detections = load(input)
+        with open(filename, 'r') as infile:
+            self.detections = load(infile)
         self.marker_id = 0
         self.rate = rospy.Rate(1)
         self.map_objects = self.make_marker_array(self.detections)
-        self.map_publisher = rospy.Publisher('~map_objects', MarkerArray, queue_size = 10)
+        self.map_publisher = rospy.Publisher('~map_objects', MarkerArray, queue_size=10)
         self.map_server = rospy.Service('~object_location', GetObjectLocation, self.object_location)
         self.process()
 

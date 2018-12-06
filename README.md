@@ -13,6 +13,9 @@ Click for better quality.
 
 [![turtlebot3_slam_3d_mapping](https://user-images.githubusercontent.com/20625381/49206744-58ac6e80-f3f6-11e8-895b-23a05ec03512.gif)](https://drive.google.com/open?id=11fpvLkPqPS2xIGGCNxgHxWuRkkYeu7e-)
 
+Objects found by the robot are mapped as below:
+
+![semantic_map](https://user-images.githubusercontent.com/20625381/49587668-e57f9b00-f9a7-11e8-8414-81462b6e2e36.png)
 
 ## Quick Start:
 

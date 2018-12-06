@@ -73,6 +73,8 @@
       <arg name="model" value="waffle"/>
       <arg name="odom_topic" value="stereo_camera/odom"/>
     </include>
+    <node if="$(arg localization)" pkg="turtlebot3_slam_3d" type="detection_publisher.py"
+          name="detection_collector" output="screen"/>
 
     <!-- RVIZ node -->
     <node if="$(arg rviz)" pkg="rviz" type="rviz" name="rviz" args="-d $(arg rviz_config)" />

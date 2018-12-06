@@ -8,6 +8,14 @@
   <license>TODO</license>
 
   <buildtool_depend>catkin</buildtool_depend>
+
+  <!-- message generation -->
+  <depend>std_msgs</depend>
+  <depend>geometry_msgs</depend>
+  <build_depend>message_generation</build_depend>
+  <exec_depend>message_runtime</exec_depend>
+
+  <!-- other dependencies -->
   <exec_depend>rtabmap_ros</exec_depend>
   <exec_depend>darknet_ros</exec_depend>
   <exec_depend>jsk_pcl_ros</exec_depend>

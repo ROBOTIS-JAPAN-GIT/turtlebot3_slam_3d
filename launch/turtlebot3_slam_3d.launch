@@ -24,6 +24,10 @@
     <arg name="use_zed" value="$(arg use_zed)"/>
   </include>
 
+  <!-- SUBSCRIBER -->
+  <node pkg="turtlebot3_slam_3d" type="detection_collector.py"
+        name="detection_collector" output="screen"/>
+
   <!-- RVIZ -->
   <node if="$(arg rviz)" pkg="rviz" type="rviz" name="rviz"
 	args="-d $(find turtlebot3_slam_3d)/config/yolo.rviz" />

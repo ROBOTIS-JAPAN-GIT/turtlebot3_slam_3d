@@ -79,7 +79,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('-i', '--input_file', type=str, default='~/.ros/detections_raw.db')
     parser.add_argument('-o', '--output_file', type=str, default='detections_dbscan.db')
-    parser.add_argument('-p', '--plot', type=bool, default=False)
+    parser.add_argument('-p', '--plot', action='store_true')
     parser.add_argument('-d', '--output_directory', type=str, default='out',
                         help='Directory to where graphs are saved when --plot is set.')
     parser.add_argument('--eps', type=float, default=0.3)

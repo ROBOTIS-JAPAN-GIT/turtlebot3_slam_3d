@@ -20,6 +20,7 @@
   <exec_depend>darknet_ros</exec_depend>
   <exec_depend>jsk_pcl_ros</exec_depend>
   <exec_depend>jsk_pcl_ros_utils</exec_depend>
+  <exec_depend>realsense2_description</exec_depend>
   <exec_depend>turtlebot3_description</exec_depend>
   <exec_depend>turtlebot3_navigation</exec_depend>
   <exec_depend>turtlebot3_bringup</exec_depend>

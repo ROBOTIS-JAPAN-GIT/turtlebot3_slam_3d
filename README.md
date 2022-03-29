@@ -57,6 +57,30 @@ Default `bag_file` path is set to `turtlebot3_slam_3d/rtab_bag.bag`.
 
 Map is saved to `~/.ros/rtabmap.db` as default setting.
 
+### Generate Semantic Map
+![tb3_semantic_map](https://user-images.githubusercontent.com/20625381/160585807-d0411ffc-470c-43ec-be6c-65ce42b422eb.png)
+
+Semantic mapping can be generated using the code in the scripts directory.
+We perform this procedure offline to save calculation time during execution and to make the clustering algorithm easier.
+
+To generate a detection database from a bag file:
+1. Start the bag file:
+```bash
+roslaunch turtlebot3_slam_3d demo_bag.launch bag_file:=/absolute/path/to/bag_file.bag
+```
+2. Wait for the bag to load and for the robot to be displayed properly.
+3. Run the collector script. This will collect detection results and save them to files in the current directory (`detections_raw.db` and `detections_dbscan.db`).
+
+```bash
+rosrun turtlebot3_slam_3d detection_collector.py 
+```
+4. Wait until the rosbag play has finished and all detections have been collected.
+
+To display the detected objects in the map, start the bag file with `publish_detection:=true`.
+
+```bash
+$ roslaunch turtlebot3_slam_3d demo_bag.launch publish_detection:=true detection_db:=/absolute/path/to/detections_dbscan.db
+```
 
 ## Run with Turtlebot3
 

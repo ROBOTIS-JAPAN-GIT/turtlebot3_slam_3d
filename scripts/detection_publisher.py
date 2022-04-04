@@ -13,7 +13,7 @@ class DetectionPublisher(object):
         with open(filename, 'r') as infile:
             self.detections = load(infile)
         self.marker_id = 0
-        self.rate = rospy.Rate(1)
+        self.rate = rospy.Rate(2)
         self.map_objects = self.make_marker_array(self.detections)
         self.map_publisher = rospy.Publisher('~map_objects', MarkerArray, queue_size=10)
         self.map_server = rospy.Service('~object_location', GetObjectLocation, self.object_location)
